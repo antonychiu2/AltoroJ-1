@@ -31,7 +31,19 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
+        
+      - name: Setup Java on this machine
+        uses: actions/setup-java@v3
+        with:
+          distribution: "oracle"
+          java-version: "19"
+          
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+      
+      - name: Execute Gradle build
+        run: ./gradle build
+        
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
         with:
