@@ -1,12 +1,13 @@
-
-apply plugin: 'war'
+plugins {
+    id 'war'
+}
 
 webAppDirName = 'WebContent'
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 sourceSets {
@@ -14,30 +15,28 @@ sourceSets {
         java {
             srcDirs = ['src']
         }
-		resources {
+        resources {
             srcDirs = ['src']
         }
     }
 }
 
 dependencies {
-	implementation \
-		fileTree(dir: "${webAppDirName}/WEB-INF/lib", include: '*.jar'),
-		'commons-codec:commons-codec:1.6',
-		'commons-lang:commons-lang:2.5',
-			'com.hynnet:commons-lang3:3.4',
-		'org.apache.derby:derby:10.8.2.2',
-		'org.glassfish.jersey.core:jersey-server:2.27',
-		'org.glassfish.jersey.containers:jersey-container-servlet:2.27',
-		'org.glassfish.jersey.inject:jersey-hk2:2.27',
-			'log4j:log4j:1.2.17',
-		'org.json:json:20220924'
-	compileOnly  \
-		'javax:javaee-api:7.0'
+    implementation fileTree(dir: "${webAppDirName}/WEB-INF/lib", include: '*.jar')
+    implementation 'commons-codec:commons-codec:1.6'
+    implementation 'commons-lang:commons-lang:2.5'
+    implementation 'com.hynnet:commons-lang3:3.3.2'
+    implementation 'org.apache.derby:derby:10.8.2.2'
+    implementation 'org.glassfish.jersey.core:jersey-server:2.27'
+    implementation 'org.glassfish.jersey.containers:jersey-container-servlet:2.27'
+    implementation 'org.glassfish.jersey.inject:jersey-hk2:2.27'
+    implementation 'log4j:log4j:1.2.16'
+    implementation 'org.apache.wink:wink-json4j:1.4'
+    providedCompile 'javax:javaee-api:7.0'
 }
 
 war {
-	archiveName 'altoromutual.war'
-	exclude 'WEB-INF/classes/**/*.class'
-	exclude 'WEB-INF/lib/**/*.jar'
+    archiveFileName = 'altoromutual.war'
+    exclude 'WEB-INF/classes/**/*.class'
+    exclude 'WEB-INF/lib/**/*.jar'
 }
