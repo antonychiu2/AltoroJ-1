@@ -54,6 +54,7 @@ OR modify Tomcat’s startup to include –Duser.home=“<new_path>” in Java a
 - Problem: AltoroJ does not run on Tomcat due to compilation errors
 - Cause: If you have compilation errors in Eclipse, Java build path is likely to blame
 - Solution: Run AltoroJ's Gradle build in order to download required third party libraries and build AltoroJ
+- 
 
 
 # License
