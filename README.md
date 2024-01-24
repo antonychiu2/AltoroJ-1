@@ -64,6 +64,7 @@ All files found in this project are licensed under the [Apache License 2.0](http
 Provided is a [Dockerfile](Dockerfile) that can be used to easily setup altoromutual inside a container.
 
 Requirements are : 
+
 1. Install [docker](https://docs.docker.com/get-docker/)
 2. Build the image from the Altoro base directory: 
 ```docker build --name altoromutual .```
