@@ -10,7 +10,7 @@ name: "Mobb/CodeQL"
 
 on:
   workflow_dispatch:
-  # pull_request:
+  pull_request:
   #   branches: ["main"]
 
 jobs:
