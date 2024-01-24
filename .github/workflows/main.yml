@@ -1,0 +1,17 @@
+name: CodeQL Scan
+
+on:
+  workflow_dispatch:
+  # Add any other triggers you may need (e.g., push, pull_request, etc.)
+
+jobs:
+  codeql-analysis:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        language: [java, javascript]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
