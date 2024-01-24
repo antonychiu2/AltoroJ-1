@@ -1,8 +1,9 @@
 name: CodeQL Scan
 
 on:
-  workflow_dispatch:
-  # Add any other triggers you may need (e.g., push, pull_request, etc.)
+  pull_request:
+    branches: ["main"]
+
 
 jobs:
   codeql-analysis:
@@ -15,3 +16,29 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+
+    - name: Setup CodeQL
+      uses: github/codeql-action/setup@v2
+      with:
+        languages: ${{ matrix.language }}
+        jdk-version: '11' # Change this based on your Java version
+
+    - name: Initialize CodeQL
+      run: codeql database init --language=${{ matrix.language }} --source-root=.
+
+    - name: Build project
+      run: |
+        if [ "${{ matrix.language }}" == "java" ]; then
+          ./gradlew build
+        elif [ "${{ matrix.language }}" == "javascript" ]; then
+          npm install
+          npm run build
+        fi
+
+    - name: Run CodeQL analysis
+      run: codeql database analyze . --sarif-external-analysis-command-line="codeql-runner $RUNNER_TOOL_CACHE/CodeQL/0.0.0-*/codeql-runner" --language=${{ matrix.language }}
+
+    - name: Upload SARIF results
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: codeql-results.sarif
